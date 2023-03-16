@@ -17,9 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Api\V2'], function () {
     
        Route::group(['prefix' => 'products'], function () {
-        Route::get('popular', 'ProductController@get_popular_products');
-         Route::get('recommended', 'ProductController@get_recommended_products');
-          Route::get('test', 'ProductController@test_get_recommended_products');
+        /**
+         * 'popular' is the endpoint url
+         * 'get_popular_products' is the method definded in ProductController
+         * 
+         */
+        // i.e. http://127.0.0.1:8000/api/v2/products/popular
+        Route::get('popular', [ProductController::class, 'get_popular_products']);
+        
+        Route::get('recommended', 'ProductController@get_recommended_products');
+        
+        Route::get('test', 'ProductController@test_get_recommended_products');
     }); 
         Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
         Route::post('register', 'CustomerAuthController@register');

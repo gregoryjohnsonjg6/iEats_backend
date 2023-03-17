@@ -69,4 +69,24 @@ class ProductController extends Controller
         // return json_decode($list);
     }
 
+    public function get_drinks(Request $request){
+        $list = Food::where('type_id', 4)->take(10)->get();
+        
+                foreach ($list as $item){
+                    $item['description']=strip_tags($item['description']);
+                    $item['description']=$Content = preg_replace("/&#?[a-z0-9]+;/i"," ",$item['description']); 
+                    unset($item['selected_people']);
+                    unset($item['people']);
+                }
+                
+                 $data =  [
+                    'total_size' => $list->count(),
+                    'type_id' => 4,
+                    'offset' => 0,
+                    'products' => $list
+                ];
+                
+         return response()->json($data, 200);
+    }
+
 }

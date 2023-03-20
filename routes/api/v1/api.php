@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Auth\CustomerAuthController;
 use App\Http\Controllers\Api\V1\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Api\V1'], function () {
     
+    /// PRODUCTS
        Route::group(['prefix' => 'products'], function () {
         /**
          * 'popular' is the endpoint url
@@ -26,8 +28,8 @@ Route::group(['namespace' => 'Api\V1'], function () {
         // i.e. http://127.0.0.1:8000/api/v1/products/popular
         Route::get('popular', [ProductController::class, 'get_popular_products']);
         
-         Route::get('recommended', 'ProductController@get_recommended_products');
-          Route::get('test', 'ProductController@test_get_recommended_products');
+        Route::get('recommended', 'ProductController@get_recommended_products');
+        Route::get('test', 'ProductController@test_get_recommended_products');
 
         /**
          * 'drinks' is the endpoint url
@@ -36,10 +38,17 @@ Route::group(['namespace' => 'Api\V1'], function () {
          */
         // i.e. http://127.0.0.1:8000/api/v2/products/drinks
         Route::get('drinks', [ProductController::class, 'get_drinks']);
-    }); 
+        }); 
+
+        /// REGISTRATION AND LOGIN
         Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
-        Route::post('register', 'CustomerAuthController@register');
-        Route::post('login', 'CustomerAuthController@login');
+            /**
+             * 'register' is the endpoint url
+             * 'register' is the method definded in ProductController
+             * 
+             */
+            Route::post('register', [CustomerAuthController::class,'register']);
+            Route::post('login', 'CustomerAuthController@login');
         });
    
         

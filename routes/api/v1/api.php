@@ -43,12 +43,17 @@ Route::group(['namespace' => 'Api\V1'], function () {
         /// REGISTRATION AND LOGIN
         Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
             /**
-             * 'register' is the endpoint url
-             * 'register' is the method definded in ProductController
-             * 
+             * '/register' is the endpoint url
+             * 'register' is the method definded in CustomerAuthController
+             * i.e. http://127.0.0.1:8000/api/v1/auth/register
              */
-            Route::post('register', [CustomerAuthController::class,'register']);
-            Route::post('login', 'CustomerAuthController@login');
+            Route::post('/register', [CustomerAuthController::class,'register']);
+            /**
+             * 'login' is the endpoint url
+             * 'login' is the method definded in CustomerAuthController
+             * i.e http://127.0.0.1:8000/api/v1/auth/login
+             */
+            Route::post('/login', [CustomerAuthController::class,'login']);
         });
    
         

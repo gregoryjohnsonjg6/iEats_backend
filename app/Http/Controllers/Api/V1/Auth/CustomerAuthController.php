@@ -17,7 +17,7 @@ class CustomerAuthController extends Controller
      public function login(Request $request)
     {
           $validator = Validator::make($request->all(), [
-            'phone' => 'required',
+            'email' => 'required',
             'password' => 'required|min:6'
         ]);
 
@@ -25,7 +25,7 @@ class CustomerAuthController extends Controller
             return response()->json(['errors' => Helpers::error_processor($validator)], 403);
         }
         $data = [
-            'phone' => $request->phone,
+            'email' => $request->email,
             'password' => $request->password
         ];
         
@@ -40,8 +40,9 @@ class CustomerAuthController extends Controller
                     'errors' => $errors
                 ], 403);
             }
-          
-            return response()->json(['token' => $token, 'is_phone_verified'=>auth()->user()->is_phone_verified], 200);
+        //return response()->json(['token' => $token, 'is_phone_verified'=>auth()->user()->is_phone_verified], 200);
+        return response()->json(['token' => $token, 'email_verified_at'=>auth()->user()->is_email_verified], 200);
+
         } else {
             $errors = [];
             array_push($errors, ['code' => 'auth-001', 'message' => 'Unauthorized.']);

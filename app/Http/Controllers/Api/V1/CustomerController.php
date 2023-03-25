@@ -19,8 +19,8 @@ class CustomerController extends Controller{
     {
         $data = $request->user();
         
-        $data['order_count'] =0;//(integer)$request->user()->orders->count();
-        $data['member_since_days'] =(integer)$request->user()->created_at->diffInDays();
+        //$data['order_count'] =0;//(integer)$request->user()->orders->count();
+        //$data['member_since_days'] =(integer)$request->user()->created_at->diffInDays();
         //unset($data['orders']);
         return response()->json($data, 200);
     }

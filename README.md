@@ -17,3 +17,108 @@ composer update
 username: admin
 password: admin
 ```
+
+## API DOCUMENTATION:
+1. Get popular products
+- Endpoint : http://127.0.0.1:8000/api/v1/products/popular
+- Headers: Accept : json/application
+- Response: 
+```
+{
+    "total_size": 6,
+    "type_id": 2,
+    "offset": 0,
+    "products": [
+        {
+            "id": 11,
+            "name": "Hilsha fish",
+            "description": "Ilish Mach aka Hilsa fish is in the season and needless to say, I cooked it a few times this year as well. This year, however, I have used Ilish mach to make simple delicacies mostly. Ilish Beguner Jhol is probably the simplest of the lot, well, after Ilish Mach Bhaja.Ilish Mach aka Hilsa fish is in the season and needless to say, I cooked it a few times this year as well. This year, however, I have used Ilish mach to make simple delicacies mostly. Ilish Beguner Jhol is probably the simplest of the lot, well, after Ilish Mach Bhaja.Ilish Mach aka Hilsa fish is in the season and needless to say, I cooked it a few times this year as well. This year, however, I have used Ilish mach to make simple delicacies mostly. Ilish Beguner Jhol is probably the simplest of the lot, well, after Ilish Mach Bhaja.",
+            "price": 12,
+            "stars": 5,
+            "img": "images/1343ce6cf6792383dfc071727afd5c46.jpeg",
+            "location": "china",
+            "created_at": "2021-12-27 01:35:34",
+            "updated_at": "2022-01-01 03:56:22",
+            "type_id": 2
+        },
+        {
+            "id": 1,
+            "name": "Nutritious fruit meal in china",
+            "description": "This five red bases, two are dedicated to salami (fennel and regular), and there s a classic capricciosa or beef carpaccio. Blanco options include a mushroom, and a four-cheese extravaganza featuring great lobes of a tangy fior di latte they make in house every day (more on this later). Classic, precise, good.I think it s still better to think of this venue not as a pizzeria, but as Pizza, by Di Stasio.Rinaldo Di Stasio and Mallory Wall s empire, including the original restaurant and bar in St Kilda, Citta and now Carlton, is a designer label for dining.",
+            "price": 12,
+            "stars": 4,
+            "img": "images/ea9367e8a16f1d3e41d4a3ae9af2baff.png",
+            "location": "Canada, British Columbia",
+            "created_at": "2021-11-17 05:09:08",
+            "updated_at": "2022-01-01 03:27:22",
+            "type_id": 2
+        }
+    ]
+}
+```
+
+2. Get recommended products
+- Endpoint : http://127.0.0.1:8000/api/v1/products/recommended
+- Headers: Accept : json/application
+- Response: 
+```
+
+```
+
+3. Register User
+- Endpoint: http://127.0.0.1:8000/api/v1/auth/register
+- Headers: Content-Type : application/json
+- Body:
+```
+{
+    "f_name": "B",
+    "email": "b@gmail.com",
+    "phone": "0727613272",
+    "password": "123456"
+}
+```
+- response : 
+```
+{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzZhMWNjNWQzN2JjODg5OWZjOWU2M2IzNDIxNTg1NDJhNmVmYWIwMjI0OGQwN2JhNDY5ZjU1ZjAyNjI2ZmJhOWI0M2RmYWVkNjczMTgyNzMiLCJpYXQiOjE2Nzk3NDQyNzAuMDc3MTg4LCJuYmYiOjE2Nzk3NDQyNzAuMDc3MTg5LCJleHAiOjE3MTEzNjY2NzAuMDc1MzQzLCJzdWIiOiI3OSIsInNjb3BlcyI6W119.JVGpPBDojznSNF98DNzNpoTDVmQ4qA65fTfqQ46FWeSCnhbqwyNAftDfCBdQ8c_csdJy8YkhB-jhd-j_WBDWTNg4gRJsfwP-UPJkaDtrxvupQNK3lPnOp0zUp4KB04WVjO4b1QoeC9_1rPpV6siPoZslWjx8Grts4m_bxW5SxJseqZP0bC3Frut2aa2KWxFBVd44AwCbE4M-FOwPhqcBwBinWnsVfNKt8G78jALRZXYWn6zBgQFt4kpQ97HkKCK0Fh59g9jKjsktIJ_CYd5hQnTAmeP7AvZaMsz2kKcfg_ZuKSWFgxsLbMIHkbe0bsBVknDcjf7-5khuXTBAf6l-eq6atwxhfHQ64TO-izANE9F0hTDng5HHOBs06LDtv0J8OY6D8-cF1BkSNjlfmLCWXU8RZy9xn5C_28QuWFv8sfodOjey5zIvg8Kj10rPL7X73L6txjhBIAoqkhx5BTdoFC0Y1R-A_cDrESFB3Ueij6ZY2U-I51xWNHpACCKn0ll8W6ZBBkZNPbE2Czl8Zpxyjb_h1k0X3905lBlB_EQnX8P25qV9i4LUHfbAWy6Q2QfRkVvapHKeJ1_Px0ho7aBPxWQpqOb0rvkkoajZR10J_juZbWl5j2VleDs3vyChVemUSfTcsBTGeyoCXOvnOjaWhNwPFCLp5bWxp6x8Dn4XNV8",
+    "is_phone_verified": 0,
+    "phone_verify_end_url": "api/v1/auth/verify-phone"
+}
+```
+
+3. Login User
+- Endpoint: http://127.0.0.1:8000/api/v1/auth/login
+- Headers: Content-Type : application/json
+- Body:
+```
+{
+    "email": "b@gmail.com",
+    "password": "123456"
+}
+```
+- response : 
+```
+{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYTMzYTNhZmUzMjYzNDA1MjJmZTk0MjVhZDMzODhmYWNjMzNkMzg0YjJhOWIwMzI1ZjAzNjkyZTY0OTViMGMzOWFlNzM4M2E5ODNmMGFmMTkiLCJpYXQiOjE2Nzk3NDUyNjMuMTM1MTI3LCJuYmYiOjE2Nzk3NDUyNjMuMTM1MTI4LCJleHAiOjE3MTEzNjc2NjMuMTMwODM3LCJzdWIiOiI3OSIsInNjb3BlcyI6W119.Jw0q22oMsjiV-yQFULOc_nehSPsqRGH70php7AS_4PIG8aHIfr94Pa8bCk67o1tj-cGthYaPSKlHMTjbagyGWHMNYYKPHK9kvru-8FMwgZ0gmz0u-Dr8Ka32TKoNhFzhyLQgxFsAICII-J5P5Pkz-Sa4OJ5WMEdUHgf-RNCDZSUIKpjhu6m9sXVALqGmLmWZEBitxiLMdlAtJdXLmrCl3iuVcDjAUtINOY6HDdIR4EEdGQZicjom8axvSVIgPS85RtmJcXU_IuXrm2hRe4IwFjDKJQbZo-NdDvpEkUQ-NKWB4GSuOAjpNliX8zWrUtuyVgHY9rHT16AteyhbETBBAOqkYSzv8fv9jNm77PxXHYVu-fB4qYWH-YihsM4eVPAyftjz3xKrJ_gfE_EnoTafYT1i8Eg3r3jE70K3Fqhq9unpKDxK6J0D38EexWHSCV_7BUtSE0ycaFVIyXefkGEw7Q8cMvVJLmIOZ1ATRXD-TJJb1N8pv9YWY5XzGexWFHcHRjm32poDOLQ_POk3aHqElVYeKBXrFUdNZbgZxeyljX2qzymAJaQaUD3nM-pC8lx1jYiSfxeY2D9-l-fzUCIaDK1uL1rYSkKK_x-sh7MohNKRXcBKvE6lPr59gj4yC7J55w_BJT8DJdHRpMwTb4kf-NV7yk0E-hytX6FhpJ0N0p0",
+    "email_verified_at": null
+}
+```
+
+5. Get Customer info
+- Endpoint: http://127.0.0.1:8000/api/v1/customer/info
+- Headers: Content-Type : application/json
+- Authorization Bearer: [[[Add the token obtained above]]]
+- response :
+```
+{
+    "id": 76,
+    "f_name": "Martin Wainaina",
+    "phone": "0797292290",
+    "email": "martin@gmail.com",
+    "status": 1,
+    "email_verified_at": null,
+    "created_at": "2023-03-22 02:24:34",
+    "updated_at": "2023-03-22 02:24:34",
+    "order_count": 0
+}
+```

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth\CustomerAuthController;
+use App\Http\Controllers\Api\V1\CustomerController;
 use App\Http\Controllers\Api\V1\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,7 @@ Route::group(['namespace' => 'Api\V1'], function () {
              * i.e. http://127.0.0.1:8000/api/v1/auth/register
              */
             Route::post('/register', [CustomerAuthController::class,'register']);
+            
             /**
              * 'login' is the endpoint url
              * 'login' is the method definded in CustomerAuthController
@@ -57,9 +59,17 @@ Route::group(['namespace' => 'Api\V1'], function () {
         });
    
         
+        // CUSTOMER INFOR,... GUARDED BY A MIDDLEWARE
         Route::group(['prefix' => 'customer', 'middleware' => 'auth:api'], function () {
             Route::get('notifications', 'NotificationController@get_notifications');
-            Route::get('info', 'CustomerController@info');
+           
+            /**
+             * '/info' is the endpoint url
+             * 'info' is the method definded in CustomerController
+             * i.e http://127.0.0.1:8000/api/v1/customer/info
+             */
+            Route::get('/info', [CustomerController::class, 'info']);
+            
             Route::post('update-profile', 'CustomerController@update_profile');
             Route::post('update-interest', 'CustomerController@update_interest');
             Route::put('cm-firebase-token', 'CustomerController@update_cm_firebase_token');

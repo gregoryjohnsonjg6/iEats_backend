@@ -24,7 +24,14 @@ class ConfigController extends Controller
             return response()->json(['errors' => Helpers::error_processor($validator)], 403);
         }
        
-        $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json?latlng='.$request->lat.','.$request->lng.'&key='."Your key the one you put in your flutter");
+        /// Get the address name based on the latitude and longitude received.
+        /// Google map api key is obtained from : https://console.cloud.google.com/google/maps-apis/credentials?project=ieats-381804
+        /**
+         * API KEY for all devices AIzaSyDIcs-cXjaLkxO4FHUXdAJsUSXG4UjuvWE
+         * API KEY for only iOS devices AIzaSyDnyW47ZnMaCi0sNgUfAbe4lWIZmTh7O1A
+         * API KEY for only android devices AIzaSyB9txBevFfFt2ENt4pvW8-Ch6PWfyxHsNo
+         */
+        $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json?latlng='.$request->lat.','.$request->lng.'&key='."AIzaSyDIcs-cXjaLkxO4FHUXdAJsUSXG4UjuvWE");
         return $response->json();
     }
         public function get_zone(Request $request)

@@ -10,6 +10,12 @@
 composer update
 ```
 
+# Sample error message
+```
+Route [login] not defined.
+```
+- The above error is caused by errors in the headers...
+
 ## Admin login URL:
 - [Admin](http://localhost:8000/admin)
 - Credentials:

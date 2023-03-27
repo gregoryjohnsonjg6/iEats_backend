@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller{
     
+    // get all address list
      public function address_list(Request $request)
     {
         return response()->json(CustomerAddress::where('user_id', $request->user()->id)->latest()->get(), 200);

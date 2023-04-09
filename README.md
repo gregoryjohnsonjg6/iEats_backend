@@ -24,6 +24,13 @@ username: admin
 password: admin
 ```
 
+## API KEYs
+- Google map Android key: AIzaSyB9txBevFfFt2ENt4pvW8-Ch6PWfyxHsNo
+- Google map iOS key: AIzaSyDnyW47ZnMaCi0sNgUfAbe4lWIZmTh7O1A
+- Google map All devices key: AIzaSyDIcs-cXjaLkxO4FHUXdAJsUSXG4UjuvWE
+- DBESTECH Google map ;-) key: AIzaSyCMESvjp3G5FtPnukZ28_GVOuFSvEhSS9c
+
+
 ## API DOCUMENTATION:
 1. Get popular products
 - Endpoint : http://127.0.0.1:8000/api/v1/products/popular

@@ -135,3 +135,29 @@ password: admin
     "order_count": 0
 }
 ```
+
+## Paypal Integration
+- [Github link](https://github.com/paypal/PayPal-PHP-SDK/wiki/Installation-Composer)
+- Install Paypal SDK
+```
+composer require "paypal/rest-api-sdk-php:*"
+or
+composer require "paypal/rest-api-sdk-php:*" --ignore-platform-req=ext-sodium
+111
+```
+
+## create models
+- create business Settings and orders model and migrations
+```
+php artisan make:model BusinessSetting -m
+php artisan make:model Order
+```
+
+## Install Toastr 
+- [Toastr Documentation](https://packagist.org/packages/brian2694/laravel-toastr)
+- Use following command to install toastr js:
+```
+composer require brian2694/laravel-toastr
+or
+composer require brian2694/laravel-toastr --ignore-platform-req=ext-sodium
+```

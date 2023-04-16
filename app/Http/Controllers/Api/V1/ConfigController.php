@@ -75,6 +75,7 @@ class ConfigController extends Controller
         }
 
         /// DBESTECH API KEY: AIzaSyCMESvjp3G5FtPnukZ28_GVOuFSvEhSS9c
+        /// My Api Key, though not authorize : AIzaSyDIcs-cXjaLkxO4FHUXdAJsUSXG4UjuvWE
 
         $response = Http::get(
             "https://maps.googleapis.com/maps/api/place/autocomplete/json?input="
@@ -85,5 +86,32 @@ class ConfigController extends Controller
 
         return $response->json();
 
+    }
+
+    public function place_api_details(Request $request){
+        /// DBESTECH API KEY: AIzaSyCMESvjp3G5FtPnukZ28_GVOuFSvEhSS9c
+        /// My Api Key, though not authorize : AIzaSyDIcs-cXjaLkxO4FHUXdAJsUSXG4UjuvWE
+
+
+        $validator = Validator::make($request->all(), [
+            "placeid" => "required",
+        ]);
+
+        // If there is any errors
+        if($validator->errors()->count()>0){
+            return response()->json(
+                ["errors" => Helpers::error_processor($validator)],
+                403
+            );
+        }
+
+        $response = Http::get(
+            "https://maps.googleapis.com/maps/api/place/details/json?placeid="
+            .$request["placeid"]
+            ."&key="
+            ."AIzaSyCMESvjp3G5FtPnukZ28_GVOuFSvEhSS9c"
+        );
+
+        return $response->json();
     }
 }

@@ -201,3 +201,25 @@ sizeof(): Argument #1 ($value) must be of type Countable|array, string given
 - Username: codegara_martin
 - PSWD : 7zOp^On$#z.b
 - DB_HOST: http://i-eats-api.codegarage.co.ke
+- SAMPLE .ENV
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=codegara_i_eats_db
+DB_USERNAME='codegara_martin'
+DB_PASSWORD='7zOp^On$#z.b'
+````
+
+## Hosting laravel Web/API on a server:
+- [Dbestech youtube link](youtube.com/watch?v=kgC4GXINx-4&t=336s)
+- [Dbestech Documentation](https://www.dbestech.com/tutorials/flutter-food-delivery-app-e-commerce-for-ios-and-android)
+- To solve Error:
+```
+Your Composer dependencies require a PHP version ">= 8.1.0" [duplicate]
+```
+- Follow the following link: https://stackoverflow.com/questions/72846653/your-composer-dependencies-require-a-php-version-8-1-0
+- solutions is : 
+```
+Don't change any thing in your application. In your shard hosting, go to cPanel and find/search Multi PHP Manager. Select your domain or sub domain (whatever you are working with), from dropdown list select PHP 8.1 and apply.
+```

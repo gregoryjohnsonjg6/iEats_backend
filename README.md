@@ -195,3 +195,9 @@ sizeof(): Argument #1 ($value) must be of type Countable|array, string given
 ```
 } else if (is_array($v) && sizeof($v) <= 0) {
 ```
+
+# http://i-eats-api.codegarage.co.ke/ DB
+- DB name: codegara_i_eats_db
+- Username: codegara_martin
+- PSWD : 7zOp^On$#z.b
+- DB_HOST: http://i-eats-api.codegarage.co.ke

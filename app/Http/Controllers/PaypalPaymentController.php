@@ -22,9 +22,6 @@ use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Common\PayPalModel;
 use PayPal\Rest\ApiContext;
-
-use function PHPSTORM_META\type;
-
 //require __DIR__  . '/PayPal-PHP-SDK/autoload.php';
 //require __DIR__  . '/PayPal-PHP-SDK/autoload.php';
 
@@ -32,8 +29,6 @@ class PaypalPaymentController extends Controller
 {
         public function __construct()
     {
-        /// CHECK  Under directory config/paypal
-        /// GET HIDDEN ENV FILES
         $paypal_conf = Config::get('paypal');
         
         $this->_api_context =  new \PayPal\Rest\ApiContext(new OAuthTokenCredential(
@@ -45,6 +40,8 @@ class PaypalPaymentController extends Controller
 
     public function payWithpaypal(Request $request)
     {
+         //http://127.0.0.1:8000/payment-mobile?customer_id=73&order_id=100009
+
        
         $order = Order::with(['details'])->where(['id' => session('order_id')])->first();
  
@@ -82,34 +79,16 @@ class PaypalPaymentController extends Controller
         ->setCancelUrl(URL::route('payment-fail'));
 
         $payment = new Payment();
-        
         $payment->setIntent('Sale')
             ->setPayer($payer)
             ->setRedirectUrls($redirect_urls)
             ->setTransactions(array($transaction));
         
         try {
-            //https://eb90-154-155-229-73.ngrok-free.app/payment-mobile?customer_id=73&order_id=100009
-
-            // dd($this->_api_context);
-            //var_dump ($this->_api_context);
             
             $payment->create($this->_api_context);
-            
-            // $my_data = [
-            //     'settings'=> array(
-            //         'mode' => env('PAYPAL_MODE', 'sandbox'),
-            //         'http.ConnectionTimeOut' =>30,
-            //         'log.LogEnabled' =>true,
-            //         'log.FileName' => storage_path().'/logs/paypal.log',
-            //         'log.LogLevel' => 'ERROR'
-            //     ),
-            //     'client_id' => env('PAYPAL_CLIENT_ID', ''),
-            //     'secret' => env('PAYPAL_SECRET', ''),
-                
-            //     ];
 
-            //var_dump(gettype(json_encode($my_data)));
+             //var_dump(gettype(json_encode($my_data)));
             //$payment->create(json_encode($my_data));
            
              /**
@@ -151,14 +130,14 @@ class PaypalPaymentController extends Controller
 
         } catch (\Exception $ex) {
            dd($ex->getData());
-                //  Toastr::error(trans($ex->getData(),['method'=>trans('messages.paypal')]));
+               //   Toastr::error(trans($ex->getData(),['method'=>trans('messages.paypal')]));
 
             Toastr::error(trans('messages.your_currency_is_not_supported',['method'=>trans('messages.paypal')]));
             return back();
         }
 
         Session::put('error', trans('messages.config_your_account',['method'=>trans('messages.paypal')]));
-        //return back();
+        return back();
     }
     
     public function getPaymentStatus(Request $request)

@@ -45,7 +45,27 @@ class OrderController extends Controller
         $order->pending = now(); //checked
         $order->created_at = now(); //checked
         $order->updated_at = now();//checked
+        $order->order_type = $request['order_type'];
         
+        /**
+         * newly added
+         */
+        $order->payment_status = $request['payment_method'] == 'wallet' ? 'paid' : 'unpaid';
+        $order->order_status = $request['payment_method'] == 'digital_payment' ? 'failed' : ($order->payment_method = $request->payment_method);
+        $scheduled_at = $order->scheduled_at = $request->scheduled_at ? \Carbon\Carbon::parse( $request->scheduled_at) : now();
+
+        if($request->scheduled_at && $scheduled_at < now()){
+            return response()->json([
+                'errors' => [
+                    'code' => 'order_time',
+                    'message' => trans('message.you_can_not_schedule_a_order_in_the_paast')
+                ]
+            ], 406);
+        }
+
+        $order->scheduled_at = $request->scheduled_at;
+        $order->scheduled = $request->scheduled_at ? 1 : 0;
+
         foreach ($request['cart'] as $c) {
      
                 $product = Food::find($c['id']); //checked

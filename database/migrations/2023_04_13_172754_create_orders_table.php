@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('payment_method');
             $table->string('transaction_reference');
             $table->string('order_status');
+            $table->string('status_id');
             $table->timestamp('confirmed');
             $table->timestamp('accepted');
             $table->tinyInteger('scheduled');

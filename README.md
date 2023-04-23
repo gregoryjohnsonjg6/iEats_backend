@@ -201,7 +201,7 @@ sizeof(): Argument #1 ($value) must be of type Countable|array, string given
 - Username: codegara_martin
 - PSWD : 7zOp^On$#z.b
 - DB_HOST: http://i-eats-api.codegarage.co.ke
-- SAMPLE .ENV
+- SAMPLE .ENV file... NB use the '' for username and password
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1

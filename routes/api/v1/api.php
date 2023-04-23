@@ -60,6 +60,8 @@ Route::group(['namespace' => 'Api\V1'], function () {
    
         
         // CUSTOMER INFOR,... GUARDED BY A MIDDLEWARE
+        ///  'middleware' => 'auth:api' means that only logged in users can access these apis
+        /// to access these apis in postman, one must provide a token
         Route::group(['prefix' => 'customer', 'middleware' => 'auth:api'], function () {
             Route::get('notifications', 'NotificationController@get_notifications');
            

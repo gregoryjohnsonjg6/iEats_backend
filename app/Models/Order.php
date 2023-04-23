@@ -27,6 +27,8 @@ class Order extends Model
 
     public function details()
     {
+        // OrderDetail is the model name
+        //Relationship is every order has many order-details
         return $this->hasMany(OrderDetail::class);
     }
 }

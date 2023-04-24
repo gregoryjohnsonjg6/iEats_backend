@@ -51,7 +51,10 @@ class OrderController extends Controller
          * newly added
          */
         $order->payment_status = $request['payment_method'] == 'wallet' ? 'paid' : 'unpaid';
-        $order->order_status = $request['payment_method'] == 'digital_payment' ? 'failed' : ($order->payment_method = $request->payment_method);
+        $order->order_status = $request['payment_method'] == 'digital_payment' ? 'failed' :
+         ($request->payment_method == 'wallet' ? 'confirmed':'pending');
+        $order->payment_method = $request->payment_method;
+        // $order->payment_method = $request == 'wallet' ? 'confirmed':'pending';
         $scheduled_at = $order->scheduled_at = $request->scheduled_at ? \Carbon\Carbon::parse( $request->scheduled_at) : now();
 
         if($request->scheduled_at && $scheduled_at < now()){
@@ -96,6 +99,8 @@ class OrderController extends Controller
 
 
         try {
+            // $status = OrderTrack::where('order_status', $order->order_status)->first();
+            // $order->status_id=$status->id;
             $save_order= $order->id;
             $total_price= $product_price;
             $order->order_amount = $total_price;

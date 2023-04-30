@@ -8,6 +8,7 @@ use App\CentralLogics\Helpers;
 use App\Models\Food;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use Exception;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -96,6 +97,7 @@ class OrderController extends Controller
                     ], 401);
                 }
         }
+        
 
 
         try {
@@ -109,11 +111,25 @@ class OrderController extends Controller
             foreach ($order_details as $key => $item) {
                 $order_details[$key]['order_id'] = $order->id;
             }
+            // foreach ($order_details as $key) {
+            //     $order_details[$key->order_id] = $order->id;
+            // }
             /*
             insert method takes array of arrays and insert each array in the database as a record.
             insert method is part of query builder
             */
             OrderDetail::insert($order_details);
+
+            //sending notifications
+            Helpers::send_order_notification($order, $request->user()->cm_firebase_token);
+            
+            //fAAa6zf6Qmun1gPpS_SB5S:APA91bGpRb9Tj5IH8euL35Zako6TAwA6YO6V_FF7WoHYFuWqhsX3RGX_nDPoXnPXuikr-5K9xkh-J5s9sEhP3zonPgAQoBlKWCFFLKyNrgw89BT_Fe1hXlWlJiIgHb_TxirVyiHyyqkf
+            // Helpers::send_order_notification($order, 
+    
+            // "fAAa6zf6Qmun1gPpS_SB5S:APA91bGpRb9Tj5IH8euL35Zako6TAwA6YO6V_FF7WoHYFuWqhsX3RGX_nDPoXnPXuikr-5K9xkh-J5s9sEhP3zonPgAQoBlKWCFFLKyNrgw89BT_Fe1hXlWlJiIgHb_TxirVyiHyyqkf"
+            // );
+
+
 
             return response()->json([
                 'message' => trans('messages.order_placed_successfully'),
@@ -121,8 +137,10 @@ class OrderController extends Controller
                 'total_ammount' => $total_price,
                 
             ], 200);
-        } catch (\Exception $e) {
-            return response()->json([$e], 403);
+        } catch (Exception $e) {
+
+            return response()->json(["Following errors occured"=>$e
+            ], 403);
         }
 
         return response()->json([

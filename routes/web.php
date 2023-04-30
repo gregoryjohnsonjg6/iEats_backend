@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/404-page', function () {
+    return view('404_page');
+});
+
 // PAYPAL ROUTES
 Route::group(['prefix' => 'payment-mobile'], function () {
     Route::get('/', 'PaymentController@payment')->name('payment-mobile');
@@ -26,3 +30,10 @@ Route::post('pay-paypal', 'PaypalPaymentController@payWithpaypal')->name('pay-pa
 Route::get('paypal-status', 'PaypalPaymentController@getPaymentStatus')->name('paypal-status');
 Route::get('payment-success', 'PaymentController@success')->name('payment-success');
 Route::get('payment-fail', 'PaymentController@fail')->name('payment-fail');
+
+
+/*last route should be for the unknown url*/
+//this will redirect to the index page if any unknown routing url is given by mistake or by purpose.
+// Route::get('/{any}',function () {
+//     return view('404_page');
+// }); 

@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Api\V1'], function () {
+
+    //currency
+    Route::get('currency', [CustomerController::class, 'getCurrency']);
+    // fcm
+    Route::get('send-fcm', [CustomerController::class, 'sendFCM']);
+
     
     /// PRODUCTS
        Route::group(['prefix' => 'products'], function () {

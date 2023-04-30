@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api\V1;
 
+use App\CentralLogics\Helpers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -14,6 +15,27 @@ class CustomerController extends Controller{
      public function address_list(Request $request)
     {
         return response()->json(CustomerAddress::where('user_id', $request->user()->id)->latest()->get(), 200);
+    }
+
+    public function getCurrency(){
+        $currency = Helpers::currency_code();
+        // $currency = Helpers::order_status_update_message("confirmed");
+        return response()->json(["currency" => $currency], 200);
+    }
+
+    // http://127.0.0.1:8000/api/v1/send-fcm
+    public function sendFCM(){
+        $fcm_device_token = "fAAa6zf6Qmun1gPpS_SB5S:APA91bGpRb9Tj5IH8euL35Zako6TAwA6YO6V_FF7WoHYFuWqhsX3RGX_nDPoXnPXuikr-5K9xkh-J5s9sEhP3zonPgAQoBlKWCFFLKyNrgw89BT_Fe1hXlWlJiIgHb_TxirVyiHyyqkf";
+        $data = [
+            'title' => "This is my title",
+            'description' => "This is my description",
+            'order_id' => 11,
+            'image' => '',
+            'type' => 'order_status',
+        ];
+        $response = Helpers::send_push_notif_to_device( $fcm_device_token, $data);
+        return response()->json(["Fcm response" => json_decode($response)], 200);
+
     }
 
     public function info(Request $request)
@@ -90,5 +112,25 @@ class CustomerController extends Controller{
         ];
         DB::table('customer_addresses')->where('user_id', $request->user()->id)->update($address);
         return response()->json(['message' => trans('messages.updated_successfully'),'zone_id'=>$zone->id], 200);
+    }
+
+    public function update_cm_firebase_token(Request $request){
+        $validator = Validator::make($request->all(), [
+            'cm_firebase_token' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'errors' => Helpers::error_processor($validator)
+            ]);
+        }
+
+        DB::table('users')->where('id', $request->user()->id)->update([
+            'cm_firebase_token' => $request['cm_firebase_token']
+        ]);
+
+        return response()->json([
+            'message' => trans('message.updated_successfully')
+        ]);
     }
 }

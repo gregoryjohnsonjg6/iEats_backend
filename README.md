@@ -223,3 +223,9 @@ Your Composer dependencies require a PHP version ">= 8.1.0" [duplicate]
 ```
 Don't change any thing in your application. In your shard hosting, go to cPanel and find/search Multi PHP Manager. Select your domain or sub domain (whatever you are working with), from dropdown list select PHP 8.1 and apply.
 ```
+
+## create usernotification model
+- command: 
+```
+php artisan make:model UserNotification -m
+```

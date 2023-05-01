@@ -79,6 +79,23 @@ class Helpers
     }
 
     public static function send_push_notif_to_device($fcm_token, $data, $delivery=0){
+        /**
+         * "key" is the FCM server key. Can be obtained from firebase projects.
+         * Steps in obtaining server key:
+         * 1. head to https://firebase.google.com/
+         * 2. click "Go to console"
+         * 3. select/ create a project
+         * 4. click on project settings.
+         * 5. click cloud messaging
+         * 6. enable "Cloud Messaging API (Legacy)" by clicking the three dots in the right side 
+         * 7. Then copy server key
+         * 
+         * 
+         * 
+         * "fcm_token" is the device token obtained from the phone
+         * steps in obtaining :
+         * Read : https://firebase.google.com/docs/cloud-messaging/flutter/client
+         */
         $key=0;
         if($delivery==1){
             $key = BusinessSetting::where(['key' => 'delivery_boy_push_notification_key'])->first()->value; 
@@ -91,6 +108,8 @@ class Helpers
         /// 1. title_loc_key
         /// 2. body_loc_key
 
+        // "data":{} is what one sees when notification arrives.
+        // "noitification": {} is what information that is contained in that notification
         $url = "https://fcm.googleapis.com/fcm/send";
         $header = array(
             // 'authorization: key='.$key->content."",
@@ -107,7 +126,7 @@ class Helpers
                 "type":"'.$data['type'].'",
                 "is_read":0
             },
-            "noitification":{
+            "notification":{
                 "title":"'.$data['title'].'",
                 "body":"'.$data['description'].'",
                 "order_id":"'.$data['order_id'].'",

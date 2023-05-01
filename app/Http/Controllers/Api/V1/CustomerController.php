@@ -25,7 +25,7 @@ class CustomerController extends Controller{
 
     // http://127.0.0.1:8000/api/v1/send-fcm
     public function sendFCM(){
-        $fcm_device_token = "fAAa6zf6Qmun1gPpS_SB5S:APA91bGpRb9Tj5IH8euL35Zako6TAwA6YO6V_FF7WoHYFuWqhsX3RGX_nDPoXnPXuikr-5K9xkh-J5s9sEhP3zonPgAQoBlKWCFFLKyNrgw89BT_Fe1hXlWlJiIgHb_TxirVyiHyyqkf";
+        $fcm_device_token = "dY_rPK4MQbOWpXql-6mlew:APA91bE6Jnw0h-OIxIubMzVJqHGjCHs3xS-Fsu8QUGMfeQMsqZbuHRpeSgNxt7tMxQOw1Vnt62MZ8lr_ySV4kL-f5_cdgWlqm00dmJLDB3uEkju3OP7LjE777LvJGFZxe8OC5DyqRg8f";
         $data = [
             'title' => "This is my title",
             'description' => "This is my description",

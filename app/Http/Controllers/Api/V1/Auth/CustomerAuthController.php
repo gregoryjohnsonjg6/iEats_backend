@@ -45,7 +45,7 @@ class CustomerAuthController extends Controller
 
         } else {
             $errors = [];
-            array_push($errors, ['code' => 'auth-001', 'message' => 'Unauthorized.']);
+            array_push($errors, ['code' => 'auth-001', 'message' => 'Phone or password doesn\'t match, pleas try again.']);
             return response()->json([
                 'errors' => $errors
             ], 401);

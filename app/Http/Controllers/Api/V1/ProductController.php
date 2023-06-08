@@ -11,11 +11,16 @@ class ProductController extends Controller
     public function get_popular_products(Request $request){
   
         //$list = Food::where('type_id', 2)->take(10)->get();
-        //order from the latest
+        //order from the latest (new to old)
         $list = Food::where('type_id', 2)->take(10)->orderBy('created_at', 'DESC')->get();
 
         
                 foreach ($list as $item){
+                    //convert string to int (CPANEL has conversion issues)
+                    // $item['price'] = (int)$item['price'];
+                    // $item['stars'] = (int)$item['stars'];
+                    // $item['type_id'] = (int)$item['type_id'];
+
                     $item['description']=strip_tags($item['description']);
                     $item['description']=$Content = preg_replace("/&#?[a-z0-9]+;/i"," ",$item['description']); 
                     unset($item['selected_people']);
@@ -39,6 +44,11 @@ class ProductController extends Controller
             $list = Food::where('type_id', 3)->take(10)->orderBy('created_at', 'DESC')->get();
         
                 foreach ($list as $item){
+                    //convert string to int (CPANEL has conversion issues)
+                    $item['price'] = (int)$item['price'];
+                    $item['stars'] = (int)$item['stars'];
+                    $item['type_id'] = (int)$item['type_id'];
+
                     $item['description']=strip_tags($item['description']);
                     $item['description']=$Content = preg_replace("/&#?[a-z0-9]+;/i"," ",$item['description']); 
                     unset($item['selected_people']);
@@ -61,6 +71,11 @@ class ProductController extends Controller
         $list = Food::skip(5)->take(2)->get();
       
         foreach ($list as $item){
+            //convert string to int (CPANEL has conversion issues)
+            $item['price'] = (int)$item['price'];
+            $item['stars'] = (int)$item['stars'];
+            $item['type_id'] = (int)$item['type_id'];
+
             $item['description']=strip_tags($item['description']);
             $item['description']=$Content = preg_replace("/&#?[a-z0-9]+;/i"," ",$item['description']); 
         }
@@ -81,6 +96,11 @@ class ProductController extends Controller
         $list = Food::where('type_id', 4)->take(10)->orderBy('created_at', 'DESC')->get();
 
                 foreach ($list as $item){
+                    //convert string to int (CPANEL has conversion issues)
+                    $item['price'] = (int)$item['price'];
+                    $item['stars'] = (int)$item['stars'];
+                    $item['type_id'] = (int)$item['type_id'];
+                    
                     $item['description']=strip_tags($item['description']);
                     $item['description']=$Content = preg_replace("/&#?[a-z0-9]+;/i"," ",$item['description']); 
                     unset($item['selected_people']);
